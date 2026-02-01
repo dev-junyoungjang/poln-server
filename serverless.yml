@@ -1,0 +1,101 @@
+service: tcg-api
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: ap-northeast-2
+  memorySize: 256
+  timeout: 10
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+          Resource:
+            - arn:aws:dynamodb:ap-northeast-2:*:table/full-league
+  environment:
+    LEAGUES_TABLE: full-league
+
+plugins:
+  - serverless-esbuild
+  - serverless-offline
+
+custom:
+  esbuild:
+    bundle: true
+    minify: false
+    sourcemap: true
+    target: node20
+    platform: node
+    format: cjs
+  serverless-offline:
+    httpPort: 3000
+    lambdaPort: 3002
+
+functions:
+  proxy:
+    handler: src/handler.proxy
+    events:
+      - http:
+          path: /api/proxy
+          method: get
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+            allowCredentials: false
+      - http:
+          path: /api/proxy
+          method: options
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+            allowCredentials: false
+
+  createLeague:
+    handler: src/league.createLeague
+    events:
+      - http:
+          path: /api/league
+          method: post
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+            allowCredentials: false
+      - http:
+          path: /api/league
+          method: options
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+            allowCredentials: false
+
+  getLeague:
+    handler: src/league.getLeague
+    events:
+      - http:
+          path: /api/league
+          method: get
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+            allowCredentials: false
+
+  updateLeague:
+    handler: src/league.updateLeague
+    events:
+      - http:
+          path: /api/league
+          method: put
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+            allowCredentials: false
