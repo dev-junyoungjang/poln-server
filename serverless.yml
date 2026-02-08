@@ -15,9 +15,9 @@ provider:
             - dynamodb:PutItem
             - dynamodb:UpdateItem
           Resource:
-            - arn:aws:dynamodb:ap-northeast-2:*:table/full-league
+            - arn:aws:dynamodb:ap-northeast-2:*:table/full-league-table
   environment:
-    LEAGUES_TABLE: full-league
+    LEAGUES_TABLE: full-league-table
 
 plugins:
   - serverless-esbuild

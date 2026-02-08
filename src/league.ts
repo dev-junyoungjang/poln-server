@@ -23,7 +23,7 @@ const client = new DynamoDBClient(
 );
 const docClient = DynamoDBDocumentClient.from(client);
 
-const TABLE_NAME = 'full-league';
+const TABLE_NAME = 'full-league-table';
 
 function corsHeaders(origin?: string) {
   return {
@@ -84,6 +84,8 @@ export async function createLeague(
     const start_at = new Date().toISOString();
 
     const item = {
+      PK: `LEAGUE#${league_id}`,
+      SK: `METADATA#${league_id}`,
       league_id,
       start_at,
       ...body,
@@ -136,7 +138,7 @@ export async function getLeague(
     const result = await docClient.send(
       new GetCommand({
         TableName: TABLE_NAME,
-        Key: { league_id },
+        Key: { PK: `LEAGUE#${league_id}`, SK: `METADATA#${league_id}` },
       })
     );
 
@@ -190,7 +192,7 @@ export async function updateLeague(
     await docClient.send(
       new UpdateCommand({
         TableName: TABLE_NAME,
-        Key: { league_id },
+        Key: { PK: `LEAGUE#${league_id}`, SK: `METADATA#${league_id}` },
         UpdateExpression:
           'SET players = :players, current_round = :current_round, total_rounds = :total_rounds, matches = :matches, game_started = :game_started, round_in_progress = :round_in_progress, updated_at = :updated_at',
         ExpressionAttributeValues: {

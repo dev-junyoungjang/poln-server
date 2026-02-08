@@ -160,7 +160,7 @@
                     "dynamodb:PutItem",
                     "dynamodb:UpdateItem"
                   ],
-                  "Resource": "arn:aws:dynamodb:ap-northeast-2:*:table/full-league"
+                  "Resource": "arn:aws:dynamodb:ap-northeast-2:*:table/full-league-table"
                 }
               ]
             }
@@ -189,7 +189,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tcg-api/dev/1769835065466-2026-01-31T04:51:05.466Z/tcg-api.zip"
+          "S3Key": "serverless/tcg-api/dev/1769932351272-2026-02-01T07:52:31.272Z/tcg-api.zip"
         },
         "Handler": "src/handler.proxy",
         "Runtime": "nodejs20.x",
@@ -198,7 +198,7 @@
         "Timeout": 10,
         "Environment": {
           "Variables": {
-            "LEAGUES_TABLE": "full-league"
+            "LEAGUES_TABLE": "full-league-table"
           }
         },
         "Role": {
@@ -219,7 +219,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tcg-api/dev/1769835065466-2026-01-31T04:51:05.466Z/tcg-api.zip"
+          "S3Key": "serverless/tcg-api/dev/1769932351272-2026-02-01T07:52:31.272Z/tcg-api.zip"
         },
         "Handler": "src/league.createLeague",
         "Runtime": "nodejs20.x",
@@ -228,7 +228,7 @@
         "Timeout": 10,
         "Environment": {
           "Variables": {
-            "LEAGUES_TABLE": "full-league"
+            "LEAGUES_TABLE": "full-league-table"
           }
         },
         "Role": {
@@ -249,7 +249,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tcg-api/dev/1769835065466-2026-01-31T04:51:05.466Z/tcg-api.zip"
+          "S3Key": "serverless/tcg-api/dev/1769932351272-2026-02-01T07:52:31.272Z/tcg-api.zip"
         },
         "Handler": "src/league.getLeague",
         "Runtime": "nodejs20.x",
@@ -258,7 +258,7 @@
         "Timeout": 10,
         "Environment": {
           "Variables": {
-            "LEAGUES_TABLE": "full-league"
+            "LEAGUES_TABLE": "full-league-table"
           }
         },
         "Role": {
@@ -279,7 +279,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tcg-api/dev/1769835065466-2026-01-31T04:51:05.466Z/tcg-api.zip"
+          "S3Key": "serverless/tcg-api/dev/1769932351272-2026-02-01T07:52:31.272Z/tcg-api.zip"
         },
         "Handler": "src/league.updateLeague",
         "Runtime": "nodejs20.x",
@@ -288,7 +288,7 @@
         "Timeout": 10,
         "Environment": {
           "Variables": {
-            "LEAGUES_TABLE": "full-league"
+            "LEAGUES_TABLE": "full-league-table"
           }
         },
         "Role": {
@@ -302,44 +302,44 @@
         "UpdateLeagueLogGroup"
       ]
     },
-    "ProxyLambdaVersionqfLNaVCSkrLeL5AOjUaPP4NwZYtgqrApTJ1knco": {
+    "ProxyLambdaVersionyr2OT6jfpEKMilA3fSlazpPpPeLhlUUE5ipqEGupkI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ProxyLambdaFunction"
         },
-        "CodeSha256": "1JGYJ//5uWv8fMjwN0zcFZWIneWemu6YGT8pyKyBNdA="
+        "CodeSha256": "pLm4TlGtRbe/waCcdAe0Pso1eHrV5H9qp4z7zVC2E6s="
       }
     },
-    "CreateLeagueLambdaVersionkPO4caWzrsohzxCa2zjPSMK7fw0MiCa5DfOx1SyzMk": {
+    "CreateLeagueLambdaVersionl2hu8T4vvL9pDGgFTmuw6bPYOwJakEZ9aLiXT46FXbY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CreateLeagueLambdaFunction"
         },
-        "CodeSha256": "1JGYJ//5uWv8fMjwN0zcFZWIneWemu6YGT8pyKyBNdA="
+        "CodeSha256": "pLm4TlGtRbe/waCcdAe0Pso1eHrV5H9qp4z7zVC2E6s="
       }
     },
-    "GetLeagueLambdaVersionntPbrczxsXLCQfTYh3hRhbHw7TaigHM5cRRI6peSsaE": {
+    "GetLeagueLambdaVersionNPgKogm9PlbuL3eff2p9Thk9gCNYYzgGtSEAVOHgM": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetLeagueLambdaFunction"
         },
-        "CodeSha256": "1JGYJ//5uWv8fMjwN0zcFZWIneWemu6YGT8pyKyBNdA="
+        "CodeSha256": "pLm4TlGtRbe/waCcdAe0Pso1eHrV5H9qp4z7zVC2E6s="
       }
     },
-    "UpdateLeagueLambdaVersionsLTHbUObUyu5HM4CXZpm2KzJsffUDtdOununRT7kbLg": {
+    "UpdateLeagueLambdaVersionSZfhZRTlP4LJEiO8CM2LtcMavqKXwWePUrLJMAbB9c": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UpdateLeagueLambdaFunction"
         },
-        "CodeSha256": "1JGYJ//5uWv8fMjwN0zcFZWIneWemu6YGT8pyKyBNdA="
+        "CodeSha256": "pLm4TlGtRbe/waCcdAe0Pso1eHrV5H9qp4z7zVC2E6s="
       }
     },
     "ApiGatewayRestApi": {
@@ -723,7 +723,7 @@
         "UpdateLeagueLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1769835064322": {
+    "ApiGatewayDeployment1769932350147": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -903,7 +903,7 @@
     "ProxyLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ProxyLambdaVersionqfLNaVCSkrLeL5AOjUaPP4NwZYtgqrApTJ1knco"
+        "Ref": "ProxyLambdaVersionyr2OT6jfpEKMilA3fSlazpPpPeLhlUUE5ipqEGupkI"
       },
       "Export": {
         "Name": "sls-tcg-api-dev-ProxyLambdaFunctionQualifiedArn"
@@ -912,7 +912,7 @@
     "CreateLeagueLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CreateLeagueLambdaVersionkPO4caWzrsohzxCa2zjPSMK7fw0MiCa5DfOx1SyzMk"
+        "Ref": "CreateLeagueLambdaVersionl2hu8T4vvL9pDGgFTmuw6bPYOwJakEZ9aLiXT46FXbY"
       },
       "Export": {
         "Name": "sls-tcg-api-dev-CreateLeagueLambdaFunctionQualifiedArn"
@@ -921,7 +921,7 @@
     "GetLeagueLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetLeagueLambdaVersionntPbrczxsXLCQfTYh3hRhbHw7TaigHM5cRRI6peSsaE"
+        "Ref": "GetLeagueLambdaVersionNPgKogm9PlbuL3eff2p9Thk9gCNYYzgGtSEAVOHgM"
       },
       "Export": {
         "Name": "sls-tcg-api-dev-GetLeagueLambdaFunctionQualifiedArn"
@@ -930,7 +930,7 @@
     "UpdateLeagueLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UpdateLeagueLambdaVersionsLTHbUObUyu5HM4CXZpm2KzJsffUDtdOununRT7kbLg"
+        "Ref": "UpdateLeagueLambdaVersionSZfhZRTlP4LJEiO8CM2LtcMavqKXwWePUrLJMAbB9c"
       },
       "Export": {
         "Name": "sls-tcg-api-dev-UpdateLeagueLambdaFunctionQualifiedArn"
