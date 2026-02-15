@@ -6,6 +6,8 @@ provider:
   region: ap-northeast-2
   memorySize: 256
   timeout: 10
+  websocketsApiName: full-league-ws
+  websocketsApiRouteSelectionExpression: $request.body.action
   iam:
     role:
       statements:
@@ -14,10 +16,19 @@ provider:
             - dynamodb:GetItem
             - dynamodb:PutItem
             - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+            - dynamodb:Query
           Resource:
             - arn:aws:dynamodb:ap-northeast-2:*:table/full-league-table
+            - arn:aws:dynamodb:ap-northeast-2:*:table/league-connections
+        - Effect: Allow
+          Action:
+            - execute-api:ManageConnections
+          Resource:
+            - arn:aws:execute-api:ap-northeast-2:*:*/*
   environment:
     LEAGUES_TABLE: full-league-table
+    CONNECTIONS_TABLE: league-connections
 
 plugins:
   - serverless-esbuild
@@ -99,3 +110,28 @@ functions:
             headers:
               - Content-Type
             allowCredentials: false
+
+  # WebSocket handlers
+  wsConnect:
+    handler: src/websocket.connect
+    events:
+      - websocket:
+          route: $connect
+
+  wsDisconnect:
+    handler: src/websocket.disconnect
+    events:
+      - websocket:
+          route: $disconnect
+
+  wsJoinLeague:
+    handler: src/websocket.joinLeague
+    events:
+      - websocket:
+          route: joinLeague
+
+  wsTimerUpdate:
+    handler: src/websocket.timerUpdate
+    events:
+      - websocket:
+          route: timerUpdate

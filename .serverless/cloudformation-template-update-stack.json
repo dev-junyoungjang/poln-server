@@ -189,7 +189,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tcg-api/dev/1769932351272-2026-02-01T07:52:31.272Z/tcg-api.zip"
+          "S3Key": "serverless/tcg-api/dev/1770546763062-2026-02-08T10:32:43.062Z/tcg-api.zip"
         },
         "Handler": "src/handler.proxy",
         "Runtime": "nodejs20.x",
@@ -219,7 +219,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tcg-api/dev/1769932351272-2026-02-01T07:52:31.272Z/tcg-api.zip"
+          "S3Key": "serverless/tcg-api/dev/1770546763062-2026-02-08T10:32:43.062Z/tcg-api.zip"
         },
         "Handler": "src/league.createLeague",
         "Runtime": "nodejs20.x",
@@ -249,7 +249,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tcg-api/dev/1769932351272-2026-02-01T07:52:31.272Z/tcg-api.zip"
+          "S3Key": "serverless/tcg-api/dev/1770546763062-2026-02-08T10:32:43.062Z/tcg-api.zip"
         },
         "Handler": "src/league.getLeague",
         "Runtime": "nodejs20.x",
@@ -279,7 +279,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tcg-api/dev/1769932351272-2026-02-01T07:52:31.272Z/tcg-api.zip"
+          "S3Key": "serverless/tcg-api/dev/1770546763062-2026-02-08T10:32:43.062Z/tcg-api.zip"
         },
         "Handler": "src/league.updateLeague",
         "Runtime": "nodejs20.x",
@@ -723,7 +723,7 @@
         "UpdateLeagueLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1769932350147": {
+    "ApiGatewayDeployment1770546762014": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {

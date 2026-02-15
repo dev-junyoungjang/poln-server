@@ -66,6 +66,12 @@ interface LeagueData {
   matches: Match[][];
   game_started: boolean;
   round_in_progress: boolean;
+  // Timer and creator fields for shared timer sync
+  creator_session_id?: string;
+  timer_end_time?: number | null;
+  timer_remaining_seconds?: number;
+  timer_preset_minutes?: number;
+  timer_is_running?: boolean;
 }
 
 // POST /api/league - Create a new league
@@ -189,21 +195,62 @@ export async function updateLeague(
     const body: Partial<LeagueData> = JSON.parse(event.body || '{}');
     const now = new Date().toISOString();
 
+    // Build update expression dynamically based on provided fields
+    const updateParts: string[] = ['updated_at = :updated_at'];
+    const expressionValues: Record<string, any> = { ':updated_at': now };
+
+    if (body.players !== undefined) {
+      updateParts.push('players = :players');
+      expressionValues[':players'] = body.players;
+    }
+    if (body.current_round !== undefined) {
+      updateParts.push('current_round = :current_round');
+      expressionValues[':current_round'] = body.current_round;
+    }
+    if (body.total_rounds !== undefined) {
+      updateParts.push('total_rounds = :total_rounds');
+      expressionValues[':total_rounds'] = body.total_rounds;
+    }
+    if (body.matches !== undefined) {
+      updateParts.push('matches = :matches');
+      expressionValues[':matches'] = body.matches;
+    }
+    if (body.game_started !== undefined) {
+      updateParts.push('game_started = :game_started');
+      expressionValues[':game_started'] = body.game_started;
+    }
+    if (body.round_in_progress !== undefined) {
+      updateParts.push('round_in_progress = :round_in_progress');
+      expressionValues[':round_in_progress'] = body.round_in_progress;
+    }
+    // Timer fields
+    if (body.creator_session_id !== undefined) {
+      updateParts.push('creator_session_id = :creator_session_id');
+      expressionValues[':creator_session_id'] = body.creator_session_id;
+    }
+    if (body.timer_end_time !== undefined) {
+      updateParts.push('timer_end_time = :timer_end_time');
+      expressionValues[':timer_end_time'] = body.timer_end_time;
+    }
+    if (body.timer_remaining_seconds !== undefined) {
+      updateParts.push('timer_remaining_seconds = :timer_remaining_seconds');
+      expressionValues[':timer_remaining_seconds'] = body.timer_remaining_seconds;
+    }
+    if (body.timer_preset_minutes !== undefined) {
+      updateParts.push('timer_preset_minutes = :timer_preset_minutes');
+      expressionValues[':timer_preset_minutes'] = body.timer_preset_minutes;
+    }
+    if (body.timer_is_running !== undefined) {
+      updateParts.push('timer_is_running = :timer_is_running');
+      expressionValues[':timer_is_running'] = body.timer_is_running;
+    }
+
     await docClient.send(
       new UpdateCommand({
         TableName: TABLE_NAME,
         Key: { PK: `LEAGUE#${league_id}`, SK: `METADATA#${league_id}` },
-        UpdateExpression:
-          'SET players = :players, current_round = :current_round, total_rounds = :total_rounds, matches = :matches, game_started = :game_started, round_in_progress = :round_in_progress, updated_at = :updated_at',
-        ExpressionAttributeValues: {
-          ':players': body.players,
-          ':current_round': body.current_round,
-          ':total_rounds': body.total_rounds,
-          ':matches': body.matches,
-          ':game_started': body.game_started,
-          ':round_in_progress': body.round_in_progress,
-          ':updated_at': now,
-        },
+        UpdateExpression: 'SET ' + updateParts.join(', '),
+        ExpressionAttributeValues: expressionValues,
       })
     );
 
