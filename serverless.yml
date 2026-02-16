@@ -21,6 +21,7 @@ provider:
           Resource:
             - arn:aws:dynamodb:ap-northeast-2:*:table/full-league-table
             - arn:aws:dynamodb:ap-northeast-2:*:table/league-connections
+            - arn:aws:dynamodb:ap-northeast-2:*:table/tournament-players
         - Effect: Allow
           Action:
             - execute-api:ManageConnections
@@ -29,6 +30,7 @@ provider:
   environment:
     LEAGUES_TABLE: full-league-table
     CONNECTIONS_TABLE: league-connections
+    TOURNAMENT_TABLE: tournament-players
 
 plugins:
   - serverless-esbuild
@@ -135,3 +137,43 @@ functions:
     events:
       - websocket:
           route: timerUpdate
+
+  saveTournamentRound:
+    handler: src/tournament.saveTournamentRound
+    events:
+      - http:
+          path: /api/tournament
+          method: post
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+            allowCredentials: false
+      - http:
+          path: /api/tournament
+          method: options
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+            allowCredentials: false
+
+  getTournamentWLD:
+    handler: src/tournament.getTournamentWLD
+    events:
+      - http:
+          path: /api/tournament/wld
+          method: get
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+            allowCredentials: false
+      - http:
+          path: /api/tournament/wld
+          method: options
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+            allowCredentials: false
