@@ -192,26 +192,30 @@ export async function getTournamentWLD(
       let draws = 0;
 
       // Walk through consecutive saved rounds and diff scores
-      let prevScore = 0;
+      // First round is baseline (scores before any games), diffs start from second round
+      let prevScore: number | null = null;
       for (const roundNum of savedRoundNumbers) {
         const currentScore = scores[roundNum];
         if (currentScore === undefined) continue;
+
+        if (prevScore === null) {
+          // First saved round — just set baseline, no result to count
+          prevScore = currentScore;
+          continue;
+        }
 
         const diff = currentScore - prevScore;
 
         if (diff === 3) wins++;
         else if (diff === 1) draws++;
         else if (diff === 0) losses++;
-        // diff could be other values if rounds are missing between saved ones
-        // In that case, we estimate for the gap
         else {
           // Multiple rounds gap — estimate using the diff
-          const gapRounds = roundNum - (savedRoundNumbers[savedRoundNumbers.indexOf(roundNum) - 1] || 0);
+          const prevRoundIdx = savedRoundNumbers.indexOf(roundNum) - 1;
+          const gapRounds = roundNum - savedRoundNumbers[prevRoundIdx];
           if (gapRounds === 1) {
-            // Single round, unusual score diff — treat as loss
             losses++;
           } else {
-            // Multiple rounds gap, estimate
             const estWins = Math.floor(diff / 3);
             const estDraws = diff - 3 * estWins;
             const estLosses = gapRounds - estWins - estDraws;
