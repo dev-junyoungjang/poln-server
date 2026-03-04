@@ -113,6 +113,67 @@ export async function saveTournamentRound(
   }
 }
 
+// GET /api/tournament/rounds?tid={tid}&round={round}
+// Returns all saved round data (players array) for rounds 1..round
+export async function getTournamentRounds(
+  event: APIGatewayProxyEvent
+): Promise<APIGatewayProxyResult> {
+  const origin = event.headers?.origin || event.headers?.Origin;
+
+  if (event.httpMethod === 'OPTIONS') {
+    return { statusCode: 200, headers: corsHeaders(origin), body: '' };
+  }
+
+  try {
+    const tid = event.queryStringParameters?.tid;
+    const roundStr = event.queryStringParameters?.round;
+
+    if (!tid || !roundStr) {
+      return {
+        statusCode: 400,
+        headers: { ...corsHeaders(origin), 'Content-Type': 'application/json' },
+        body: JSON.stringify({ error: 'tid and round are required' }),
+      };
+    }
+
+    const requestedRound = parseInt(roundStr);
+    const maxSK = `ROUND#${String(requestedRound).padStart(2, '0')}`;
+
+    const result = await docClient.send(
+      new QueryCommand({
+        TableName: TABLE_NAME,
+        KeyConditionExpression: 'PK = :pk AND SK BETWEEN :minSK AND :maxSK',
+        ExpressionAttributeValues: {
+          ':pk': `TOURNAMENT#${tid}`,
+          ':minSK': 'ROUND#01',
+          ':maxSK': maxSK,
+        },
+      })
+    );
+
+    const savedRounds = (result.Items || [])
+      .map((item) => ({
+        round: item.round as number,
+        tournamentName: item.tournament_name as string,
+        players: item.players as TournamentPlayer[],
+      }))
+      .sort((a, b) => a.round - b.round);
+
+    return {
+      statusCode: 200,
+      headers: { ...corsHeaders(origin), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ rounds: savedRounds }),
+    };
+  } catch (error) {
+    console.error('Error fetching tournament rounds:', error);
+    return {
+      statusCode: 500,
+      headers: { ...corsHeaders(origin), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ error: 'Failed to fetch tournament rounds' }),
+    };
+  }
+}
+
 // GET /api/tournament/wld?tid={tid}&round={round}
 export async function getTournamentWLD(
   event: APIGatewayProxyEvent

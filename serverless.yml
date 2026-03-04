@@ -158,6 +158,26 @@ functions:
               - Content-Type
             allowCredentials: false
 
+  getTournamentRounds:
+    handler: src/tournament.getTournamentRounds
+    events:
+      - http:
+          path: /api/tournament/rounds
+          method: get
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+            allowCredentials: false
+      - http:
+          path: /api/tournament/rounds
+          method: options
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+            allowCredentials: false
+
   getTournamentWLD:
     handler: src/tournament.getTournamentWLD
     events:
