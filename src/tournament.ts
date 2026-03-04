@@ -138,13 +138,14 @@ export async function getTournamentWLD(
     const requestedRound = parseInt(roundStr);
     const maxSK = `ROUND#${String(requestedRound).padStart(2, '0')}`;
 
-    // Query all saved rounds for this tournament up to the requested round
+    // Query saved rounds from round 1 up to the requested round
     const result = await docClient.send(
       new QueryCommand({
         TableName: TABLE_NAME,
-        KeyConditionExpression: 'PK = :pk AND SK <= :maxSK',
+        KeyConditionExpression: 'PK = :pk AND SK BETWEEN :minSK AND :maxSK',
         ExpressionAttributeValues: {
           ':pk': `TOURNAMENT#${tid}`,
+          ':minSK': 'ROUND#01',
           ':maxSK': maxSK,
         },
       })
@@ -152,7 +153,8 @@ export async function getTournamentWLD(
 
     const savedRounds = result.Items || [];
 
-    if (savedRounds.length === 0) {
+    // Need at least 2 rounds to compute diffs (first round is baseline)
+    if (savedRounds.length <= 1) {
       return {
         statusCode: 200,
         headers: { ...corsHeaders(origin), 'Content-Type': 'application/json' },
