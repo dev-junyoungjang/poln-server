@@ -212,6 +212,30 @@ functions:
               - Content-Type
             allowCredentials: false
 
+  putSelectedTournament:
+    handler: src/tournament.putSelectedTournament
+    events:
+      - http:
+          path: /api/tournament/selected
+          method: put
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+            allowCredentials: false
+
+  deleteSelectedTournament:
+    handler: src/tournament.deleteSelectedTournament
+    events:
+      - http:
+          path: /api/tournament/selected
+          method: delete
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+            allowCredentials: false
+
   getSelectedTournament:
     handler: src/tournament.getSelectedTournament
     events:

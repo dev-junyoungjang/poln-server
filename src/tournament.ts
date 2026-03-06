@@ -31,7 +31,7 @@ function corsHeaders(origin?: string) {
   return {
     'Access-Control-Allow-Origin': origin || '*',
     'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'GET, POST, DELETE, OPTIONS',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
   };
 }
 
@@ -378,6 +378,88 @@ export async function deleteTournamentRound(
       statusCode: 500,
       headers: { ...corsHeaders(origin), 'Content-Type': 'application/json' },
       body: JSON.stringify({ error: 'Failed to delete tournament round' }),
+    };
+  }
+}
+
+// PUT /api/tournament/selected
+export async function putSelectedTournament(
+  event: APIGatewayProxyEvent
+): Promise<APIGatewayProxyResult> {
+  const origin = event.headers?.origin || event.headers?.Origin;
+
+  if (event.httpMethod === 'OPTIONS') {
+    return { statusCode: 200, headers: corsHeaders(origin), body: '' };
+  }
+
+  try {
+    const body = JSON.parse(event.body || '{}');
+    const { tournamentId, round } = body;
+
+    if (!tournamentId) {
+      return {
+        statusCode: 400,
+        headers: { ...corsHeaders(origin), 'Content-Type': 'application/json' },
+        body: JSON.stringify({ error: 'tournamentId is required' }),
+      };
+    }
+
+    await docClient.send(
+      new PutCommand({
+        TableName: SELECTED_TABLE_NAME,
+        Item: {
+          PK: 'CURRENT',
+          tournamentId,
+          ...(round != null && { round }),
+          updated_at: new Date().toISOString(),
+        },
+      })
+    );
+
+    return {
+      statusCode: 200,
+      headers: { ...corsHeaders(origin), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ success: true, tournamentId, round: round ?? null }),
+    };
+  } catch (error) {
+    console.error('Error saving selected tournament:', error);
+    return {
+      statusCode: 500,
+      headers: { ...corsHeaders(origin), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ error: 'Failed to save selected tournament' }),
+    };
+  }
+}
+
+// DELETE /api/tournament/selected
+export async function deleteSelectedTournament(
+  event: APIGatewayProxyEvent
+): Promise<APIGatewayProxyResult> {
+  const origin = event.headers?.origin || event.headers?.Origin;
+
+  if (event.httpMethod === 'OPTIONS') {
+    return { statusCode: 200, headers: corsHeaders(origin), body: '' };
+  }
+
+  try {
+    await docClient.send(
+      new DeleteCommand({
+        TableName: SELECTED_TABLE_NAME,
+        Key: { PK: 'CURRENT' },
+      })
+    );
+
+    return {
+      statusCode: 200,
+      headers: { ...corsHeaders(origin), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ success: true }),
+    };
+  } catch (error) {
+    console.error('Error deleting selected tournament:', error);
+    return {
+      statusCode: 500,
+      headers: { ...corsHeaders(origin), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ error: 'Failed to delete selected tournament' }),
     };
   }
 }
