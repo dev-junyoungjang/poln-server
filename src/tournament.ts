@@ -2,6 +2,7 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import {
   DynamoDBDocumentClient,
+  GetCommand,
   PutCommand,
   QueryCommand,
 } from '@aws-sdk/lib-dynamodb';
@@ -23,6 +24,7 @@ const client = new DynamoDBClient(
 const docClient = DynamoDBDocumentClient.from(client);
 
 const TABLE_NAME = 'tournament-players';
+const SELECTED_TABLE_NAME = 'selected-tournament';
 
 function corsHeaders(origin?: string) {
   return {
@@ -309,6 +311,50 @@ export async function getTournamentWLD(
       statusCode: 500,
       headers: { ...corsHeaders(origin), 'Content-Type': 'application/json' },
       body: JSON.stringify({ error: 'Failed to compute WLD' }),
+    };
+  }
+}
+
+// GET /api/tournament/selected
+export async function getSelectedTournament(
+  event: APIGatewayProxyEvent
+): Promise<APIGatewayProxyResult> {
+  const origin = event.headers?.origin || event.headers?.Origin;
+
+  if (event.httpMethod === 'OPTIONS') {
+    return { statusCode: 200, headers: corsHeaders(origin), body: '' };
+  }
+
+  try {
+    const result = await docClient.send(
+      new GetCommand({
+        TableName: SELECTED_TABLE_NAME,
+        Key: { PK: 'CURRENT' },
+      })
+    );
+
+    if (!result.Item?.tournamentId) {
+      return {
+        statusCode: 404,
+        headers: { ...corsHeaders(origin), 'Content-Type': 'application/json' },
+        body: JSON.stringify({ error: 'No selected tournament' }),
+      };
+    }
+
+    return {
+      statusCode: 200,
+      headers: { ...corsHeaders(origin), 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        tournamentId: result.Item.tournamentId,
+        ...(result.Item.round != null && { round: result.Item.round }),
+      }),
+    };
+  } catch (error) {
+    console.error('Error fetching selected tournament:', error);
+    return {
+      statusCode: 500,
+      headers: { ...corsHeaders(origin), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ error: 'Failed to fetch selected tournament' }),
     };
   }
 }

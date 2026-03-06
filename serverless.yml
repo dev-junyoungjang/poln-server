@@ -22,15 +22,22 @@ provider:
             - arn:aws:dynamodb:ap-northeast-2:*:table/full-league-table
             - arn:aws:dynamodb:ap-northeast-2:*:table/league-connections
             - arn:aws:dynamodb:ap-northeast-2:*:table/tournament-players
+            - arn:aws:dynamodb:ap-northeast-2:*:table/selected-tournament
         - Effect: Allow
           Action:
             - execute-api:ManageConnections
           Resource:
             - arn:aws:execute-api:ap-northeast-2:*:*/*
+  logs:
+    restApi:
+      accessLogging: true
+      executionLogging: false
+      format: '{"requestId":"$context.requestId","ip":"$context.identity.sourceIp","method":"$context.httpMethod","path":"$context.resourcePath","status":"$context.status","responseLength":"$context.responseLength","latency":"$context.responseLatency","userAgent":"$context.identity.userAgent","time":"$context.requestTime"}'
   environment:
     LEAGUES_TABLE: full-league-table
     CONNECTIONS_TABLE: league-connections
     TOURNAMENT_TABLE: tournament-players
+    SELECTED_TOURNAMENT_TABLE: selected-tournament
 
 plugins:
   - serverless-esbuild
@@ -191,6 +198,26 @@ functions:
             allowCredentials: false
       - http:
           path: /api/tournament/wld
+          method: options
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+            allowCredentials: false
+
+  getSelectedTournament:
+    handler: src/tournament.getSelectedTournament
+    events:
+      - http:
+          path: /api/tournament/selected
+          method: get
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+            allowCredentials: false
+      - http:
+          path: /api/tournament/selected
           method: options
           cors:
             origin: '*'
