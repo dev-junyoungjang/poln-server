@@ -2,6 +2,7 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import {
   DynamoDBDocumentClient,
+  DeleteCommand,
   GetCommand,
   PutCommand,
   QueryCommand,
@@ -30,7 +31,7 @@ function corsHeaders(origin?: string) {
   return {
     'Access-Control-Allow-Origin': origin || '*',
     'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Methods': 'GET, POST, DELETE, OPTIONS',
   };
 }
 
@@ -311,6 +312,72 @@ export async function getTournamentWLD(
       statusCode: 500,
       headers: { ...corsHeaders(origin), 'Content-Type': 'application/json' },
       body: JSON.stringify({ error: 'Failed to compute WLD' }),
+    };
+  }
+}
+
+// DELETE /api/tournament?tid={tid}&round={round}
+// round 생략 시 해당 토너먼트 전체 라운드 삭제
+export async function deleteTournamentRound(
+  event: APIGatewayProxyEvent
+): Promise<APIGatewayProxyResult> {
+  const origin = event.headers?.origin || event.headers?.Origin;
+
+  if (event.httpMethod === 'OPTIONS') {
+    return { statusCode: 200, headers: corsHeaders(origin), body: '' };
+  }
+
+  try {
+    const tid = event.queryStringParameters?.tid;
+    const roundStr = event.queryStringParameters?.round;
+
+    if (!tid) {
+      return {
+        statusCode: 400,
+        headers: { ...corsHeaders(origin), 'Content-Type': 'application/json' },
+        body: JSON.stringify({ error: 'tid is required' }),
+      };
+    }
+
+    const pk = `TOURNAMENT#${tid}`;
+
+    if (roundStr) {
+      // 특정 라운드만 삭제
+      const sk = `ROUND#${String(parseInt(roundStr)).padStart(2, '0')}`;
+      await docClient.send(new DeleteCommand({ TableName: TABLE_NAME, Key: { PK: pk, SK: sk } }));
+      return {
+        statusCode: 200,
+        headers: { ...corsHeaders(origin), 'Content-Type': 'application/json' },
+        body: JSON.stringify({ deleted: { tid, round: parseInt(roundStr) } }),
+      };
+    }
+
+    // 전체 라운드 삭제: 먼저 조회 후 하나씩 삭제
+    const result = await docClient.send(
+      new QueryCommand({
+        TableName: TABLE_NAME,
+        KeyConditionExpression: 'PK = :pk',
+        ExpressionAttributeValues: { ':pk': pk },
+        ProjectionExpression: 'PK, SK',
+      })
+    );
+
+    const items = result.Items || [];
+    for (const item of items) {
+      await docClient.send(new DeleteCommand({ TableName: TABLE_NAME, Key: { PK: item.PK, SK: item.SK } }));
+    }
+
+    return {
+      statusCode: 200,
+      headers: { ...corsHeaders(origin), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ deleted: { tid, rounds: items.length } }),
+    };
+  } catch (error) {
+    console.error('Error deleting tournament round:', error);
+    return {
+      statusCode: 500,
+      headers: { ...corsHeaders(origin), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ error: 'Failed to delete tournament round' }),
     };
   }
 }

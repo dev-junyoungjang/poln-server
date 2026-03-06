@@ -28,11 +28,6 @@ provider:
             - execute-api:ManageConnections
           Resource:
             - arn:aws:execute-api:ap-northeast-2:*:*/*
-  logs:
-    restApi:
-      accessLogging: true
-      executionLogging: false
-      format: '{"requestId":"$context.requestId","ip":"$context.identity.sourceIp","method":"$context.httpMethod","path":"$context.resourcePath","status":"$context.status","responseLength":"$context.responseLength","latency":"$context.responseLatency","userAgent":"$context.identity.userAgent","time":"$context.requestTime"}'
   environment:
     LEAGUES_TABLE: full-league-table
     CONNECTIONS_TABLE: league-connections
@@ -159,6 +154,18 @@ functions:
       - http:
           path: /api/tournament
           method: options
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+            allowCredentials: false
+
+  deleteTournamentRound:
+    handler: src/tournament.deleteTournamentRound
+    events:
+      - http:
+          path: /api/tournament
+          method: delete
           cors:
             origin: '*'
             headers:
