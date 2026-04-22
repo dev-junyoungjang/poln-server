@@ -149,6 +149,12 @@
         "LogGroupName": "/aws/lambda/tcg-api-dev-putSelectedTournament"
       }
     },
+    "DeleteSelectedTournamentLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/tcg-api-dev-deleteSelectedTournament"
+      }
+    },
     "GetSelectedTournamentLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
@@ -274,7 +280,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tcg-api/dev/1772808579917-2026-03-06T14:49:39.917Z/tcg-api.zip"
+          "S3Key": "serverless/tcg-api/dev/1772810182788-2026-03-06T15:16:22.788Z/tcg-api.zip"
         },
         "Handler": "src/handler.proxy",
         "Runtime": "nodejs20.x",
@@ -307,7 +313,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tcg-api/dev/1772808579917-2026-03-06T14:49:39.917Z/tcg-api.zip"
+          "S3Key": "serverless/tcg-api/dev/1772810182788-2026-03-06T15:16:22.788Z/tcg-api.zip"
         },
         "Handler": "src/league.createLeague",
         "Runtime": "nodejs20.x",
@@ -340,7 +346,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tcg-api/dev/1772808579917-2026-03-06T14:49:39.917Z/tcg-api.zip"
+          "S3Key": "serverless/tcg-api/dev/1772810182788-2026-03-06T15:16:22.788Z/tcg-api.zip"
         },
         "Handler": "src/league.getLeague",
         "Runtime": "nodejs20.x",
@@ -373,7 +379,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tcg-api/dev/1772808579917-2026-03-06T14:49:39.917Z/tcg-api.zip"
+          "S3Key": "serverless/tcg-api/dev/1772810182788-2026-03-06T15:16:22.788Z/tcg-api.zip"
         },
         "Handler": "src/league.updateLeague",
         "Runtime": "nodejs20.x",
@@ -406,7 +412,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tcg-api/dev/1772808579917-2026-03-06T14:49:39.917Z/tcg-api.zip"
+          "S3Key": "serverless/tcg-api/dev/1772810182788-2026-03-06T15:16:22.788Z/tcg-api.zip"
         },
         "Handler": "src/websocket.connect",
         "Runtime": "nodejs20.x",
@@ -439,7 +445,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tcg-api/dev/1772808579917-2026-03-06T14:49:39.917Z/tcg-api.zip"
+          "S3Key": "serverless/tcg-api/dev/1772810182788-2026-03-06T15:16:22.788Z/tcg-api.zip"
         },
         "Handler": "src/websocket.disconnect",
         "Runtime": "nodejs20.x",
@@ -472,7 +478,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tcg-api/dev/1772808579917-2026-03-06T14:49:39.917Z/tcg-api.zip"
+          "S3Key": "serverless/tcg-api/dev/1772810182788-2026-03-06T15:16:22.788Z/tcg-api.zip"
         },
         "Handler": "src/websocket.joinLeague",
         "Runtime": "nodejs20.x",
@@ -505,7 +511,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tcg-api/dev/1772808579917-2026-03-06T14:49:39.917Z/tcg-api.zip"
+          "S3Key": "serverless/tcg-api/dev/1772810182788-2026-03-06T15:16:22.788Z/tcg-api.zip"
         },
         "Handler": "src/websocket.timerUpdate",
         "Runtime": "nodejs20.x",
@@ -538,7 +544,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tcg-api/dev/1772808579917-2026-03-06T14:49:39.917Z/tcg-api.zip"
+          "S3Key": "serverless/tcg-api/dev/1772810182788-2026-03-06T15:16:22.788Z/tcg-api.zip"
         },
         "Handler": "src/tournament.saveTournamentRound",
         "Runtime": "nodejs20.x",
@@ -571,7 +577,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tcg-api/dev/1772808579917-2026-03-06T14:49:39.917Z/tcg-api.zip"
+          "S3Key": "serverless/tcg-api/dev/1772810182788-2026-03-06T15:16:22.788Z/tcg-api.zip"
         },
         "Handler": "src/tournament.deleteTournamentRound",
         "Runtime": "nodejs20.x",
@@ -604,7 +610,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tcg-api/dev/1772808579917-2026-03-06T14:49:39.917Z/tcg-api.zip"
+          "S3Key": "serverless/tcg-api/dev/1772810182788-2026-03-06T15:16:22.788Z/tcg-api.zip"
         },
         "Handler": "src/tournament.getTournamentRounds",
         "Runtime": "nodejs20.x",
@@ -637,7 +643,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tcg-api/dev/1772808579917-2026-03-06T14:49:39.917Z/tcg-api.zip"
+          "S3Key": "serverless/tcg-api/dev/1772810182788-2026-03-06T15:16:22.788Z/tcg-api.zip"
         },
         "Handler": "src/tournament.getTournamentWLD",
         "Runtime": "nodejs20.x",
@@ -670,7 +676,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tcg-api/dev/1772808579917-2026-03-06T14:49:39.917Z/tcg-api.zip"
+          "S3Key": "serverless/tcg-api/dev/1772810182788-2026-03-06T15:16:22.788Z/tcg-api.zip"
         },
         "Handler": "src/tournament.putSelectedTournament",
         "Runtime": "nodejs20.x",
@@ -696,6 +702,39 @@
         "PutSelectedTournamentLogGroup"
       ]
     },
+    "DeleteSelectedTournamentLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/tcg-api/dev/1772810182788-2026-03-06T15:16:22.788Z/tcg-api.zip"
+        },
+        "Handler": "src/tournament.deleteSelectedTournament",
+        "Runtime": "nodejs20.x",
+        "FunctionName": "tcg-api-dev-deleteSelectedTournament",
+        "MemorySize": 256,
+        "Timeout": 10,
+        "Environment": {
+          "Variables": {
+            "LEAGUES_TABLE": "full-league-table",
+            "CONNECTIONS_TABLE": "league-connections",
+            "TOURNAMENT_TABLE": "tournament-players",
+            "SELECTED_TOURNAMENT_TABLE": "selected-tournament"
+          }
+        },
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        }
+      },
+      "DependsOn": [
+        "DeleteSelectedTournamentLogGroup"
+      ]
+    },
     "GetSelectedTournamentLambdaFunction": {
       "Type": "AWS::Lambda::Function",
       "Properties": {
@@ -703,7 +742,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tcg-api/dev/1772808579917-2026-03-06T14:49:39.917Z/tcg-api.zip"
+          "S3Key": "serverless/tcg-api/dev/1772810182788-2026-03-06T15:16:22.788Z/tcg-api.zip"
         },
         "Handler": "src/tournament.getSelectedTournament",
         "Runtime": "nodejs20.x",
@@ -729,144 +768,154 @@
         "GetSelectedTournamentLogGroup"
       ]
     },
-    "ProxyLambdaVersionJ0W1Hrqai4af6xdhT0LLxhhfFftFlrA4EKDR5eVaxo": {
+    "ProxyLambdaVersionTExcl9XYWdO9Vj9KF2lJhrBlh3J0Z3dxXV7TMuDkI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ProxyLambdaFunction"
         },
-        "CodeSha256": "dAsS2TI2D8L1Vp4uv5IfKbmDmMEsNGnfYAVh5VBLOa4="
+        "CodeSha256": "Lk5HRd8MvIG7NV56GNkLOoyBeQjHzgpZXi0ZDhI2zE4="
       }
     },
-    "CreateLeagueLambdaVersionYjqXuwJWRo4iLuEo9zTheEYecKVuGMX2O4q20uo8iTU": {
+    "CreateLeagueLambdaVersionjYLjq4NBcyEg19SZH7TGdBgqiF6V7iZBKjl3ERwS0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CreateLeagueLambdaFunction"
         },
-        "CodeSha256": "dAsS2TI2D8L1Vp4uv5IfKbmDmMEsNGnfYAVh5VBLOa4="
+        "CodeSha256": "Lk5HRd8MvIG7NV56GNkLOoyBeQjHzgpZXi0ZDhI2zE4="
       }
     },
-    "GetLeagueLambdaVersionOXRXnO1GjESFPUISl4VV954VA7XAGQMcbKWlO6UjjZE": {
+    "GetLeagueLambdaVersionA23yTzOXRJ0qAJaSbv3VFfEbgtJ48SVL0nUJ80": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetLeagueLambdaFunction"
         },
-        "CodeSha256": "dAsS2TI2D8L1Vp4uv5IfKbmDmMEsNGnfYAVh5VBLOa4="
+        "CodeSha256": "Lk5HRd8MvIG7NV56GNkLOoyBeQjHzgpZXi0ZDhI2zE4="
       }
     },
-    "UpdateLeagueLambdaVersionl4NFaNHOo7wQ4MuTGcsd6huaYNLKxnMRLzNuck5MJg": {
+    "UpdateLeagueLambdaVersionwQN0RkaoTi7w06RPHNbXaVP3hSBgPmQm2eoxxfI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UpdateLeagueLambdaFunction"
         },
-        "CodeSha256": "dAsS2TI2D8L1Vp4uv5IfKbmDmMEsNGnfYAVh5VBLOa4="
+        "CodeSha256": "Lk5HRd8MvIG7NV56GNkLOoyBeQjHzgpZXi0ZDhI2zE4="
       }
     },
-    "WsConnectLambdaVersione5I4NXcpy8KWMGJeStx8j81bMTzUicJ1pFffVPAHccU": {
+    "WsConnectLambdaVersionfH1xbuOUqo8jPuzRbdcgthsPIVq0grvGbNNYcGQtyXk": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "WsConnectLambdaFunction"
         },
-        "CodeSha256": "dAsS2TI2D8L1Vp4uv5IfKbmDmMEsNGnfYAVh5VBLOa4="
+        "CodeSha256": "Lk5HRd8MvIG7NV56GNkLOoyBeQjHzgpZXi0ZDhI2zE4="
       }
     },
-    "WsDisconnectLambdaVersion38hy8VvnDSOpkDjG4cd8XBnm9aXSHDroZVwveLnmVVk": {
+    "WsDisconnectLambdaVersion2E65JbYSHbSyJuvW5gYB97ocLhHlVLucJVEJjLjG04g": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "WsDisconnectLambdaFunction"
         },
-        "CodeSha256": "dAsS2TI2D8L1Vp4uv5IfKbmDmMEsNGnfYAVh5VBLOa4="
+        "CodeSha256": "Lk5HRd8MvIG7NV56GNkLOoyBeQjHzgpZXi0ZDhI2zE4="
       }
     },
-    "WsJoinLeagueLambdaVersion5si1bPD5oF3lVU5At1Xd3XqULf5Atsqwpqm5h6YDN3g": {
+    "WsJoinLeagueLambdaVersion88ocZT7dPhZprBoo5oW15v6dnqLuUmPI6TAYntOg4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "WsJoinLeagueLambdaFunction"
         },
-        "CodeSha256": "dAsS2TI2D8L1Vp4uv5IfKbmDmMEsNGnfYAVh5VBLOa4="
+        "CodeSha256": "Lk5HRd8MvIG7NV56GNkLOoyBeQjHzgpZXi0ZDhI2zE4="
       }
     },
-    "WsTimerUpdateLambdaVersion0CXHqEwFV8j6DQJOhc6OhSUQq3cxVVhMC9Vew8TEr8": {
+    "WsTimerUpdateLambdaVersiondwVuX7nwYNqXhjozIxUT5kM2v4RaT3DRB70QIpKGEQg": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "WsTimerUpdateLambdaFunction"
         },
-        "CodeSha256": "dAsS2TI2D8L1Vp4uv5IfKbmDmMEsNGnfYAVh5VBLOa4="
+        "CodeSha256": "Lk5HRd8MvIG7NV56GNkLOoyBeQjHzgpZXi0ZDhI2zE4="
       }
     },
-    "SaveTournamentRoundLambdaVersionK0hBz2rLQDkOeQj6yYa433NVpTpNzu4ZcjnK2jX84w4": {
+    "SaveTournamentRoundLambdaVersionvJvOFni9nxtsTiHjNCRVA1zcaDKzuAChXtU2j4wIx8": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SaveTournamentRoundLambdaFunction"
         },
-        "CodeSha256": "dAsS2TI2D8L1Vp4uv5IfKbmDmMEsNGnfYAVh5VBLOa4="
+        "CodeSha256": "Lk5HRd8MvIG7NV56GNkLOoyBeQjHzgpZXi0ZDhI2zE4="
       }
     },
-    "DeleteTournamentRoundLambdaVersionEBqRrQG9nN8E7lQozy4sr7AAIqvsFwtpJKWxjBVs": {
+    "DeleteTournamentRoundLambdaVersionyxc07ce2PIv2N2drK1osx4VqHdEvOGwuxtGpe7NwSQ4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "DeleteTournamentRoundLambdaFunction"
         },
-        "CodeSha256": "dAsS2TI2D8L1Vp4uv5IfKbmDmMEsNGnfYAVh5VBLOa4="
+        "CodeSha256": "Lk5HRd8MvIG7NV56GNkLOoyBeQjHzgpZXi0ZDhI2zE4="
       }
     },
-    "GetTournamentRoundsLambdaVersionmRCHR4vPnvZWOHVumC2zNLJN6spEd6mJnT0RlxQU28": {
+    "GetTournamentRoundsLambdaVersionnqnJHb0Tjk0JeCv6e0i6z5Bt6QLeu2lxlbQZA1Yho4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetTournamentRoundsLambdaFunction"
         },
-        "CodeSha256": "dAsS2TI2D8L1Vp4uv5IfKbmDmMEsNGnfYAVh5VBLOa4="
+        "CodeSha256": "Lk5HRd8MvIG7NV56GNkLOoyBeQjHzgpZXi0ZDhI2zE4="
       }
     },
-    "GetTournamentWLDLambdaVersionn1z71iRSJIkJfc5BgLrARbHPZ5IdgMGJRzgGy0G9Vc": {
+    "GetTournamentWLDLambdaVersionwPEQi42PuVNLz6lUbSitTtT6WfSWVRnpoWGuvC1Jg": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetTournamentWLDLambdaFunction"
         },
-        "CodeSha256": "dAsS2TI2D8L1Vp4uv5IfKbmDmMEsNGnfYAVh5VBLOa4="
+        "CodeSha256": "Lk5HRd8MvIG7NV56GNkLOoyBeQjHzgpZXi0ZDhI2zE4="
       }
     },
-    "PutSelectedTournamentLambdaVersionrdKuArJnqaQp27gJNeJWw6xlEYZRKiNjpqaGwT2E": {
+    "PutSelectedTournamentLambdaVersionY3hcUhcIj3gMHHvDIrqwEBCaNzIqIf9YNjtzhtLxI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "PutSelectedTournamentLambdaFunction"
         },
-        "CodeSha256": "dAsS2TI2D8L1Vp4uv5IfKbmDmMEsNGnfYAVh5VBLOa4="
+        "CodeSha256": "Lk5HRd8MvIG7NV56GNkLOoyBeQjHzgpZXi0ZDhI2zE4="
       }
     },
-    "GetSelectedTournamentLambdaVersionCBFtjpY0JVw23cAN9BMCjy6SWaNDW6UdJapE6evynn0": {
+    "DeleteSelectedTournamentLambdaVersionvqU6VfejalfgDfyXbrm1i169d61U9geZ2S1ov1sU": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "DeleteSelectedTournamentLambdaFunction"
+        },
+        "CodeSha256": "Lk5HRd8MvIG7NV56GNkLOoyBeQjHzgpZXi0ZDhI2zE4="
+      }
+    },
+    "GetSelectedTournamentLambdaVersionj5B7tfv0LiURRH22dC5GFnzCSmTgEB7vN8fbBVYZIY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetSelectedTournamentLambdaFunction"
         },
-        "CodeSha256": "dAsS2TI2D8L1Vp4uv5IfKbmDmMEsNGnfYAVh5VBLOa4="
+        "CodeSha256": "Lk5HRd8MvIG7NV56GNkLOoyBeQjHzgpZXi0ZDhI2zE4="
       }
     },
     "ApiGatewayRestApi": {
@@ -1362,7 +1411,7 @@
               "ResponseParameters": {
                 "method.response.header.Access-Control-Allow-Origin": "'*'",
                 "method.response.header.Access-Control-Allow-Headers": "'Content-Type'",
-                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT'"
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,DELETE,PUT'"
               },
               "ResponseTemplates": {
                 "application/json": ""
@@ -1820,6 +1869,52 @@
         "PutSelectedTournamentLambdaPermissionApiGateway"
       ]
     },
+    "ApiGatewayMethodApiTournamentSelectedDelete": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "DELETE",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceApiTournamentSelected"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "DeleteSelectedTournamentLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      },
+      "DependsOn": [
+        "DeleteSelectedTournamentLambdaPermissionApiGateway"
+      ]
+    },
     "ApiGatewayMethodApiTournamentSelectedGet": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
@@ -1866,7 +1961,7 @@
         "GetSelectedTournamentLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1772808578822": {
+    "ApiGatewayDeployment1772810181667": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -1895,6 +1990,7 @@
         "ApiGatewayMethodApiTournamentWldGet",
         "ApiGatewayMethodApiTournamentWldOptions",
         "ApiGatewayMethodApiTournamentSelectedPut",
+        "ApiGatewayMethodApiTournamentSelectedDelete",
         "ApiGatewayMethodApiTournamentSelectedGet",
         "ApiGatewayMethodApiTournamentSelectedOptions"
       ]
@@ -2201,6 +2297,43 @@
         "FunctionName": {
           "Fn::GetAtt": [
             "PutSelectedTournamentLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "DeleteSelectedTournamentLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "DeleteSelectedTournamentLambdaFunction",
             "Arn"
           ]
         },
@@ -2599,7 +2732,7 @@
     "ProxyLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ProxyLambdaVersionJ0W1Hrqai4af6xdhT0LLxhhfFftFlrA4EKDR5eVaxo"
+        "Ref": "ProxyLambdaVersionTExcl9XYWdO9Vj9KF2lJhrBlh3J0Z3dxXV7TMuDkI"
       },
       "Export": {
         "Name": "sls-tcg-api-dev-ProxyLambdaFunctionQualifiedArn"
@@ -2608,7 +2741,7 @@
     "CreateLeagueLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CreateLeagueLambdaVersionYjqXuwJWRo4iLuEo9zTheEYecKVuGMX2O4q20uo8iTU"
+        "Ref": "CreateLeagueLambdaVersionjYLjq4NBcyEg19SZH7TGdBgqiF6V7iZBKjl3ERwS0"
       },
       "Export": {
         "Name": "sls-tcg-api-dev-CreateLeagueLambdaFunctionQualifiedArn"
@@ -2617,7 +2750,7 @@
     "GetLeagueLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetLeagueLambdaVersionOXRXnO1GjESFPUISl4VV954VA7XAGQMcbKWlO6UjjZE"
+        "Ref": "GetLeagueLambdaVersionA23yTzOXRJ0qAJaSbv3VFfEbgtJ48SVL0nUJ80"
       },
       "Export": {
         "Name": "sls-tcg-api-dev-GetLeagueLambdaFunctionQualifiedArn"
@@ -2626,7 +2759,7 @@
     "UpdateLeagueLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UpdateLeagueLambdaVersionl4NFaNHOo7wQ4MuTGcsd6huaYNLKxnMRLzNuck5MJg"
+        "Ref": "UpdateLeagueLambdaVersionwQN0RkaoTi7w06RPHNbXaVP3hSBgPmQm2eoxxfI"
       },
       "Export": {
         "Name": "sls-tcg-api-dev-UpdateLeagueLambdaFunctionQualifiedArn"
@@ -2635,7 +2768,7 @@
     "WsConnectLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "WsConnectLambdaVersione5I4NXcpy8KWMGJeStx8j81bMTzUicJ1pFffVPAHccU"
+        "Ref": "WsConnectLambdaVersionfH1xbuOUqo8jPuzRbdcgthsPIVq0grvGbNNYcGQtyXk"
       },
       "Export": {
         "Name": "sls-tcg-api-dev-WsConnectLambdaFunctionQualifiedArn"
@@ -2644,7 +2777,7 @@
     "WsDisconnectLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "WsDisconnectLambdaVersion38hy8VvnDSOpkDjG4cd8XBnm9aXSHDroZVwveLnmVVk"
+        "Ref": "WsDisconnectLambdaVersion2E65JbYSHbSyJuvW5gYB97ocLhHlVLucJVEJjLjG04g"
       },
       "Export": {
         "Name": "sls-tcg-api-dev-WsDisconnectLambdaFunctionQualifiedArn"
@@ -2653,7 +2786,7 @@
     "WsJoinLeagueLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "WsJoinLeagueLambdaVersion5si1bPD5oF3lVU5At1Xd3XqULf5Atsqwpqm5h6YDN3g"
+        "Ref": "WsJoinLeagueLambdaVersion88ocZT7dPhZprBoo5oW15v6dnqLuUmPI6TAYntOg4"
       },
       "Export": {
         "Name": "sls-tcg-api-dev-WsJoinLeagueLambdaFunctionQualifiedArn"
@@ -2662,7 +2795,7 @@
     "WsTimerUpdateLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "WsTimerUpdateLambdaVersion0CXHqEwFV8j6DQJOhc6OhSUQq3cxVVhMC9Vew8TEr8"
+        "Ref": "WsTimerUpdateLambdaVersiondwVuX7nwYNqXhjozIxUT5kM2v4RaT3DRB70QIpKGEQg"
       },
       "Export": {
         "Name": "sls-tcg-api-dev-WsTimerUpdateLambdaFunctionQualifiedArn"
@@ -2671,7 +2804,7 @@
     "SaveTournamentRoundLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SaveTournamentRoundLambdaVersionK0hBz2rLQDkOeQj6yYa433NVpTpNzu4ZcjnK2jX84w4"
+        "Ref": "SaveTournamentRoundLambdaVersionvJvOFni9nxtsTiHjNCRVA1zcaDKzuAChXtU2j4wIx8"
       },
       "Export": {
         "Name": "sls-tcg-api-dev-SaveTournamentRoundLambdaFunctionQualifiedArn"
@@ -2680,7 +2813,7 @@
     "DeleteTournamentRoundLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "DeleteTournamentRoundLambdaVersionEBqRrQG9nN8E7lQozy4sr7AAIqvsFwtpJKWxjBVs"
+        "Ref": "DeleteTournamentRoundLambdaVersionyxc07ce2PIv2N2drK1osx4VqHdEvOGwuxtGpe7NwSQ4"
       },
       "Export": {
         "Name": "sls-tcg-api-dev-DeleteTournamentRoundLambdaFunctionQualifiedArn"
@@ -2689,7 +2822,7 @@
     "GetTournamentRoundsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetTournamentRoundsLambdaVersionmRCHR4vPnvZWOHVumC2zNLJN6spEd6mJnT0RlxQU28"
+        "Ref": "GetTournamentRoundsLambdaVersionnqnJHb0Tjk0JeCv6e0i6z5Bt6QLeu2lxlbQZA1Yho4"
       },
       "Export": {
         "Name": "sls-tcg-api-dev-GetTournamentRoundsLambdaFunctionQualifiedArn"
@@ -2698,7 +2831,7 @@
     "GetTournamentWLDLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetTournamentWLDLambdaVersionn1z71iRSJIkJfc5BgLrARbHPZ5IdgMGJRzgGy0G9Vc"
+        "Ref": "GetTournamentWLDLambdaVersionwPEQi42PuVNLz6lUbSitTtT6WfSWVRnpoWGuvC1Jg"
       },
       "Export": {
         "Name": "sls-tcg-api-dev-GetTournamentWLDLambdaFunctionQualifiedArn"
@@ -2707,16 +2840,25 @@
     "PutSelectedTournamentLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "PutSelectedTournamentLambdaVersionrdKuArJnqaQp27gJNeJWw6xlEYZRKiNjpqaGwT2E"
+        "Ref": "PutSelectedTournamentLambdaVersionY3hcUhcIj3gMHHvDIrqwEBCaNzIqIf9YNjtzhtLxI"
       },
       "Export": {
         "Name": "sls-tcg-api-dev-PutSelectedTournamentLambdaFunctionQualifiedArn"
       }
     },
+    "DeleteSelectedTournamentLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "DeleteSelectedTournamentLambdaVersionvqU6VfejalfgDfyXbrm1i169d61U9geZ2S1ov1sU"
+      },
+      "Export": {
+        "Name": "sls-tcg-api-dev-DeleteSelectedTournamentLambdaFunctionQualifiedArn"
+      }
+    },
     "GetSelectedTournamentLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetSelectedTournamentLambdaVersionCBFtjpY0JVw23cAN9BMCjy6SWaNDW6UdJapE6evynn0"
+        "Ref": "GetSelectedTournamentLambdaVersionj5B7tfv0LiURRH22dC5GFnzCSmTgEB7vN8fbBVYZIY"
       },
       "Export": {
         "Name": "sls-tcg-api-dev-GetSelectedTournamentLambdaFunctionQualifiedArn"

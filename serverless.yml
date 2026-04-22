@@ -28,13 +28,29 @@ provider:
             - execute-api:ManageConnections
           Resource:
             - arn:aws:execute-api:ap-northeast-2:*:*/*
+        - Effect: Allow
+          Action:
+            - s3:PutObject
+            - s3:GetObject
+            - s3:DeleteObject
+          Resource:
+            - arn:aws:s3:::plon-image/seat-image/*
+            - arn:aws:s3:::plon-image/seat-image-converted/*
+        - Effect: Allow
+          Action:
+            - s3:ListBucket
+          Resource:
+            - arn:aws:s3:::plon-image
   environment:
     LEAGUES_TABLE: full-league-table
     CONNECTIONS_TABLE: league-connections
     TOURNAMENT_TABLE: tournament-players
     SELECTED_TOURNAMENT_TABLE: selected-tournament
+    SEAT_IMAGES_BUCKET: plon-image
+    ADMIN_KEY: ${env:ADMIN_KEY, ''}
 
 plugins:
+  - serverless-dotenv-plugin
   - serverless-esbuild
   - serverless-offline
 
@@ -254,4 +270,60 @@ functions:
             origin: '*'
             headers:
               - Content-Type
+            allowCredentials: false
+
+  getSeatImage:
+    handler: src/seatImage.getSeatImage
+    events:
+      - http:
+          path: /api/tournament/seat-image
+          method: get
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+            allowCredentials: false
+      - http:
+          path: /api/tournament/seat-image
+          method: options
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - x-admin-key
+            allowCredentials: false
+
+  getSeatImageUploadUrl:
+    handler: src/seatImage.getSeatImageUploadUrl
+    events:
+      - http:
+          path: /api/tournament/seat-image/upload-url
+          method: post
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - x-admin-key
+            allowCredentials: false
+      - http:
+          path: /api/tournament/seat-image/upload-url
+          method: options
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - x-admin-key
+            allowCredentials: false
+
+  deleteSeatImage:
+    handler: src/seatImage.deleteSeatImage
+    events:
+      - http:
+          path: /api/tournament/seat-image
+          method: delete
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - x-admin-key
             allowCredentials: false
